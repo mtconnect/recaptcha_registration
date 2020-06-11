@@ -1,4 +1,4 @@
-module MTConnectRegister
+module RecaptchaRegister
   module AccountControllerPatch
     def self.included(base)
       base.prepend(InstanceMethods)

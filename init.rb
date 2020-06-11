@@ -1,11 +1,11 @@
 
-Redmine::Plugin.register :mtconnect_register do
-  name 'MTConnect Register plugin'
+Redmine::Plugin.register :recaptcha_register do
+  name 'Recaptcha Register plugin'
   author 'William Sobel'
-  description 'Additional content for the register page'
+  description 'Recaptcha protection for the register page'
   version '0.0.1'
-  url 'https://projects.mtconnect.org'
-  author_url ''
+  url 'https://wvsobel.llc'
+  author_url 'https://wvsobel.llc'
 
   settings :default => {
      'recaptcha_site_key' => '',
@@ -17,17 +17,17 @@ begin
   Rails.configuration.to_prepare do
     require_dependency 'patches/setting_patch'
     require_dependency 'patches/account_controller_patch'
-    unless Setting.included_modules.include?(MTConnectRegister::SettingPatch)
-      Setting.include(MTConnectRegister::SettingPatch)
+    unless Setting.included_modules.include?(RecaptchaRegister::SettingPatch)
+      Setting.include(RecaptchaRegister::SettingPatch)
     end
-    unless AccountController.included_modules.include?(MTConnectRegister::AccountControllerPatch)
-      AccountController.include(MTConnectRegister::AccountControllerPatch)
+    unless AccountController.included_modules.include?(RecaptchaRegister::AccountControllerPatch)
+      AccountController.include(RecaptchaRegister::AccountControllerPatch)
     end
   end
   
   if ActiveRecord::Base.connection.table_exists?(Setting.table_name)
     Rails.application.config.after_initialize do
-      settings = Setting['plugin_mtconnect_register']
+      settings = Setting['plugin_recaptcha_register']
       Recaptcha.configure do |config|
         config.site_key  = settings['recaptcha_site_key']
         config.secret_key = settings['recaptcha_secret_key']
