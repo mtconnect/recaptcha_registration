@@ -3,7 +3,7 @@ Redmine::Plugin.register :recaptcha_register do
   name 'Recaptcha Register plugin'
   author 'William Sobel'
   description 'Recaptcha protection for the register page'
-  version '0.0.1'
+  version '0.9.1'
   url 'https://wvsobel.llc'
   author_url 'https://wvsobel.llc'
 
