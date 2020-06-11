@@ -1,0 +1,6 @@
+<div class="box tabular">
+  <p><%= label_tag("settings[recaptcha_site_key]", 'Site Key') %>
+    <%= text_field_tag("settings[recaptcha_site_key]", @settings['recaptcha_site_key'], :size => 52 ) %></p>
+  <p><%= label_tag("settings[recaptcha_secret_key]", 'Secret Key') %>
+    <%= text_field_tag("settings[recaptcha_secret_key]", @settings['recaptcha_secret_key'], :size => 52 ) %></p>
+</div>
