@@ -32,17 +32,10 @@
   <p><%= f.text_field :identity_url  %></p>
 <% end %>
 
-<p><b>Must sign and comply with the</b> <a href="https://docs.mtconnect.org/MTConnect+Institute+IP+Policy_2018_06_21.pdf">INTELLECTUAL PROPERTY POLICY.</a></p>
-
 <% @user.custom_field_values.select {|v| (Setting.show_custom_fields_on_registration? && v.editable?) || v.required?}.each do |value| %>
   <p><%= custom_field_tag_with_label :user, value %></p>
 <% end %>
-
-<p><label/><b>If you agree to the IP Policy, type "yes" for "Agree to IP Policy"</b></p>
-
 </div>
-
-<h3>By clicking the "Agree and Submit" button, you are agreeing to the <a href="https://docs.mtconnect.org/MTConnect+Institute+IP+Policy_2018_06_21.pdf">INTELLECTUAL PROPERTY POLICY.</a></h3>
 
 <% settings = Setting['plugin_recaptcha_register']
    if settings and settings['recaptcha_site_key'] and !settings['recaptcha_site_key'].empty? and 
@@ -50,5 +43,5 @@
   <%= recaptcha_v3(action: 'register')  %>
 <% end %>
 
-<%= submit_tag "Agree and Submit" %>
+<%= submit_tag l(:button_submit) %>
 <% end %>
