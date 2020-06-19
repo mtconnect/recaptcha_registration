@@ -4,7 +4,7 @@ Redmine::Plugin.register :recaptcha_register do
   author 'William Sobel'
   description 'Recaptcha protection for the register page'
   version '0.9.1'
-  url 'https://wvsobel.llc'
+  url 'https://github.com/mtconnect/recaptcha_register'
   author_url 'https://wvsobel.llc'
 
   settings :default => {
