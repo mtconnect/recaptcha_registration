@@ -35,13 +35,24 @@
 <% @user.custom_field_values.select {|v| (Setting.show_custom_fields_on_registration? && v.editable?) || v.required?}.each do |value| %>
   <p><%= custom_field_tag_with_label :user, value %></p>
 <% end %>
+
 </div>
 
 <% settings = Setting['plugin_recaptcha_register']
-   if settings and settings['recaptcha_site_key'] and !settings['recaptcha_site_key'].empty? and 
+   if settings and settings['recaptcha_message'] and !settings['recaptcha_message'].empty? %>
+   <%= textilizable settings['recaptcha_message'] %>
+<% end %>
+
+<% if settings and settings['recaptcha_site_key'] and !settings['recaptcha_site_key'].empty? and 
       settings['recaptcha_secret_key'] and !settings['recaptcha_secret_key'].empty? %>
   <%= recaptcha_v3(action: 'register')  %>
 <% end %>
 
-<%= submit_tag l(:button_submit) %>
-<% end %>
+<% if settings and settings['recaptcha_submit'] and !settings['recaptcha_submit'].empty? %>
+  <%= submit_tag settings['recaptcha_submit'] %>
+<% else %>
+  <%= submit_tag l(:button_submit) %>
+<% end
+end %>
+
+

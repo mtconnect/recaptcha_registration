@@ -9,7 +9,9 @@ Redmine::Plugin.register :recaptcha_register do
 
   settings :default => {
      'recaptcha_site_key' => '',
-     'Recaptcha_secret_key' => ''
+     'recaptcha_secret_key' => '',
+     'recaptcha_message' => '',
+     'recaptcha_submit' => ''
   }, :partial => 'settings/recaptcha'
 end
 

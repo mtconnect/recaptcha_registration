@@ -3,4 +3,11 @@
     <%= text_field_tag("settings[recaptcha_site_key]", @settings['recaptcha_site_key'], :size => 52 ) %></p>
   <p><%= label_tag("settings[recaptcha_secret_key]", 'Secret Key') %>
     <%= text_field_tag("settings[recaptcha_secret_key]", @settings['recaptcha_secret_key'], :size => 52 ) %></p>
+  <p><%= label_tag("settings[recaptcha_message]", 'Message') %>
+    <%= text_area_tag "settings[recaptcha_message]", @settings['recaptcha_message'], :id => 'settings_recaptcha_message', :rows => 8, :class => 'wiki-edit' %></p>
+  <p><%= label_tag("settings[recaptcha_submit]", 'Submit Text') %>
+    <%= text_field_tag("settings[recaptcha_submit]", @settings['recaptcha_submit'], :size => 52 ) %></p>
+
+  <%= wikitoolbar_for 'settings_recaptcha_message' %>
+
 </div>
