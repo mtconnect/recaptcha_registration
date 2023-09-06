@@ -17,13 +17,13 @@ end
 
 begin
   Rails.configuration.to_prepare do
-    require_dependency 'patches/setting_patch'
-    require_dependency 'patches/account_controller_patch'
-    unless Setting.included_modules.include?(RecaptchaRegister::SettingPatch)
-      Setting.include(RecaptchaRegister::SettingPatch)
+    require_dependency 'patches/recaptcha_setting_patch'
+    require_dependency 'patches/recaptcha_account_controller_patch'
+    unless Setting.included_modules.include?(Patches::RecaptchaSettingPatch)
+      Setting.include(Patches::RecaptchaSettingPatch)
     end
-    unless AccountController.included_modules.include?(RecaptchaRegister::AccountControllerPatch)
-      AccountController.include(RecaptchaRegister::AccountControllerPatch)
+    unless AccountController.included_modules.include?(Patches::RecaptchaAccountControllerPatch)
+      AccountController.include(Patches::RecaptchaAccountControllerPatch)
     end
   end
   
