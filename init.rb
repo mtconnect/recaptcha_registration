@@ -16,17 +16,6 @@ Redmine::Plugin.register :recaptcha_register do
 end
 
 begin
-  Rails.configuration.to_prepare do
-    require_dependency 'patches/recaptcha_setting_patch'
-    require_dependency 'patches/recaptcha_account_controller_patch'
-    unless Setting.included_modules.include?(Patches::RecaptchaSettingPatch)
-      Setting.include(Patches::RecaptchaSettingPatch)
-    end
-    unless AccountController.included_modules.include?(Patches::RecaptchaAccountControllerPatch)
-      AccountController.include(Patches::RecaptchaAccountControllerPatch)
-    end
-  end
-  
   if ActiveRecord::Base.connection.table_exists?(Setting.table_name)
     Rails.application.config.after_initialize do
       settings = Setting['plugin_recaptcha_register']
@@ -36,6 +25,16 @@ begin
       end
     end
   end
+
+  require_dependency File.dirname(__FILE__) + '/lib/patches/recaptcha_setting_patch.rb'
+  require_dependency File.dirname(__FILE__) + '/lib/patches/recaptcha_account_controller_patch'
+  unless Setting.included_modules.include?(Patches::RecaptchaSettingPatch)
+    Setting.include(Patches::RecaptchaSettingPatch)
+  end
+  unless AccountController.included_modules.include?(Patches::RecaptchaAccountControllerPatch)
+    AccountController.include(Patches::RecaptchaAccountControllerPatch)
+  end
+
 rescue ActiveRecord::NoDatabaseError
   Rails.logger.warn 'database not created yet'
 end
